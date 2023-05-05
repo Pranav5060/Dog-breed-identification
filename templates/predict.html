@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{
+      background-image: url("{{ url_for('static', filename='background.jpg') }}");
+      background-size: 1500px;
+      }
+      .cont1{
+        background-color: rgba(240, 248, 255, 0.422);
+        width: 350px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+      .cont2{
+        background-color: rgba(240, 248, 255, 0.422);
+        width: 350px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body>
+<center>
+      <img src="{{url_for('static',filename=p)}}" alt="Dog" width="300" height="300" style="border: 8px solid rgba(255, 255, 255, 0.478);border-radius: 10px;">
+      <br>
+      <form action="" method="post" enctype="multipart/form-data">
+         <input type="file" name="image"
+       accept="image/png, image/jpeg">
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+      {% if pred!="" %}
+      <div class="col-md-6">
+          <div class="cont1">
+          <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:rgb(12, 12, 11); "><b> The Breed is <span style="color: red;"> {{pred[0][1]}}% </span> <br><span style="color:rgb(0, 0, 0) ;
+          text-align: center   ;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 30px;">'{{ pred[0][0]}}'</span></b></h4>
+      </div>
+      {% if pred[0][1] < 99 %}
+      <div class="cont2">
+      <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:rgb(255, 0, 0)">if not then<br>the top 5 predictions :</h4>
+              {% for dog,predict in pred[1:] %}
+                  <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color:mediumblue; margin-top: 0.5 em;"><b> I think only <span style="color: red;">{{predict}}% </span>that, it is <br><span style="color:darkred;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 30px;">'{{dog }}'</span></b></h4>
+              {% endfor %}
+      </div>
+      {% endif %}
+      
+      </div>
+    </center>
+
+      {% endif %}
+  </body>
+</html>
